@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='bootstrap.min.css')}}">
+</head>
+
+<body>
+<body>
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Edit Details</h3>
+                            <form  method="post" action="">
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" id="roll" name="roll" class="form-control form-control-lg" required="required" value="{{data.roll_no}} " disabled="disabled" />
+                                            <label class="form-label" for="roll">Roll No
+                                              </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" id="name" name="name" class="form-control form-control-lg" required="required" value="{{data.name}}"/>
+                                            <label class="form-label" for="Name"> name</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 d-flex align-items-center">
+                                        <div class="form-outline datepicker w-100">
+                                            <input type="number" name="age" class="form-control form-control-lg" id="birthdayDate" value="{{data.age}}"/>
+                                            <label for="age" class="form-label">AGE</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 d-flex align-items-center">
+                                        <div class="form-outline datepicker w-100">
+                                            <input type="text" name="gender" class="form-control form-control-lg" id="gender" value="{{data.gender}}" />
+                                            <label for="gender" class="form-label">GENDER</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 pb-2">
+                                        <div class="form-outline">
+                                            <input type="email" id="email" name="email" class="form-control form-control-lg" required="required" value="{{data.email_id}}"/>
+                                            <label class="form-label" for="email">Email</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4 pb-2">
+                                        <div class="form-outline">
+                                            <input type="text" id="department" name="department" class="form-control form-control-lg" required="required" value="{{data.dept}}"/>
+                                            <label class="form-label" for="department">Department</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 pb-2">
+                                        <div class="form-outline">
+                                            <input type="number" id="year" name="year" class="form-control form-control-lg" required="required" value="{{data.year}}"/>
+                                            <label class="form-label" for="year">Year</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4 pb-2">
+                                        <div class="form-outline">
+                                            <input type="tel" id="ph" name="ph" class="form-control form-control-lg" required="required" value="{{data.ph_no}}"/>
+                                            <label class="form-label" for="ph">Phone Number</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="mt-4 pt-2">
+                                    <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</body>
+</html>
