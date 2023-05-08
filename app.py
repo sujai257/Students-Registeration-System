@@ -16,8 +16,8 @@ mysql=MySQL(app)
 mail = Mail(app) 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = '20s147@kce.ac.in'
-app.config['MAIL_PASSWORD'] = 'AmmuAppu@0126'
+app.config['MAIL_USERNAME'] = 'mailid@gmail.com'
+app.config['MAIL_PASSWORD'] = '******'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -93,7 +93,7 @@ def mailedit(mm):
     if request.method=='POST':
         try:       
             rev= request.form ['email'] 
-            msg = Message(request.form['subject'],sender ='20s147@kce.ac.in',recipients = [rev])
+            msg = Message(request.form['subject'],sender ='mailid@gmail.com',recipients = [rev])
             msg.body = request.form['message']
             mail.send(msg)
         except:
