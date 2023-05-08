@@ -23,12 +23,15 @@ body {
 <body>
 	<center>
 		<div>
+			<div class="card-header-blue">
+				<h1 class="card-heading">Students Registration Form</h1>
+				</div>
 			<a href="{{url_for('addrecord')}}">
 				<button class="button button1" type="button">Add Student</button>
 			</a>
 		</div>
 		<div class="mid">
-			<table border="1">
+			<table class="table table-bordered">
 				<tr>
 					<th>ROLL_NO</th>
 					<th>NAME</th>
@@ -39,6 +42,7 @@ body {
 					<th>YEAR</th>
 					<th>PH_NO</th>
 					<th>EDIT</th>
+					<th>MAIL</th>
 					<th>DELETE</th>
 				</tr>
 				{% for d in data%}
@@ -52,8 +56,9 @@ body {
 					<th>{{d.year}}</th>
 					<th>{{d.ph_no}}</th>
 					<th><a href="{{url_for('edit',roll=d.roll_no)}}"><button class="button button2" type="button">Edit</button> </a></th>
-					 <td><button class="button button2" type="button"data-roll="{{ d.roll_no }}" onclick="confirmDelete(this)">Remove</button></td> 
-				</tr>
+					<th><a href="{{url_for('mailedit',mm=d.email_id)}}"><button class="button button2" type="button">Mail</button> </a></th>
+					<td><button class="button button2" type="button"data-roll="{{ d.roll_no }}" onclick="confirmDelete(this)">Remove</button></td> 
+					</tr>
 				{% endfor %}
 			</table>
 		</div>
@@ -71,6 +76,8 @@ function confirmDelete(button) {
         var url = "/remove/" + rollNo;
         window.location.href = url;
     }
+	else 
+	alert("record con not delete")
 }
 </script>
 </html>

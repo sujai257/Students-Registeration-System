@@ -4,15 +4,24 @@ from flask.templating import render_template_string
 from flask.globals import request
 from pip._internal import req
 from test.test_contains import seq
+from flask_mail import Mail,Message
 app =Flask(__name__)
-
-
 app.config["MYSQL_HOST"]="localhost"
 app.config["MYSQL_USER"]="root"
 app.config["MYSQL_PASSWORD"]="root"
 app.config["MYSQL_DB"]="sujai"
 app.config["MYSQL_CURSORCLASS"]="DictCursor"
 mysql=MySQL(app)
+
+mail = Mail(app) 
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = '20s147@kce.ac.in'
+app.config['MAIL_PASSWORD'] = 'AmmuAppu@0126'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
+
 @app.route('/')
 def index():
     con = mysql.connection.cursor()
@@ -23,10 +32,8 @@ def index():
     if success_message:
         return render_template('index.html', data=res, success_message=success_message)
     else:
-        return render_template('index.html', data=res)
-    
-    
-#add record
+        return render_template('index.html', data=res)   
+
 @app.route('/addrecord',methods=['GET','POST'])
 def addrecord():
     if(request.method=='POST'):
@@ -39,9 +46,12 @@ def addrecord():
         year=request.form['year']
         ph=request.form['ph']
         con=mysql.connection.cursor()
-        sql="insert into student values(%s,%s,%s,%s,%s,%s,%s,%s);"
-        con.execute(sql,[roll,name,age,gender,email,dept,year,ph])
-        mysql.connection.commit()
+        try:      
+            sql="insert into student values(%s,%s,%s,%s,%s,%s,%s,%s);"
+            con.execute(sql,[roll,name,age,gender,email,dept,year,ph])
+            mysql.connection.commit()
+        except:
+            return render_template("error.html")
         con.close()
         return redirect(url_for('index'))
     return render_template('addrecord.html')
@@ -77,7 +87,20 @@ def remove(roll):
     con.close()
     success_message = "Record deleted successfully"
     return redirect(url_for('index', success_message=success_message))
-    
+
+@app.route('/mailedit/<string:mm>',methods=['POST','GET'])
+def mailedit(mm):
+    if request.method=='POST':
+        try:       
+            rev= request.form ['email'] 
+            msg = Message(request.form['subject'],sender ='20s147@kce.ac.in',recipients = [rev])
+            msg.body = request.form['message']
+            mail.send(msg)
+        except:
+            return render_template('error.html')
+        else:
+            return redirect(url_for('index'))       
+    return render_template("sendmail.html",data =mm)   
 if __name__ == ("__main__"):
     app.run(debug=True) 
 
