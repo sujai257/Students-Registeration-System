@@ -21,7 +21,6 @@ app.config['MAIL_PASSWORD'] = '******'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
-
 @app.route('/')
 def index():
     con = mysql.connection.cursor()
@@ -101,6 +100,7 @@ def mailedit(mm):
         else:
             return redirect(url_for('index'))       
     return render_template("sendmail.html",data =mm)   
+print("Hello")
 if __name__ == ("__main__"):
     app.run(debug=True) 
 
