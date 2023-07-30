@@ -1,83 +1,190 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Home</title>
-<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
-<link rel="stylesheet"
-	href="{{url_for('static',filename='bootstrap.min.css')}}">
-<style type="text/css">
-body {
-	margin-top: 5%;
-	background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1),
-		rgba(245, 87, 108, 1));
-	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-	background: linear-gradient(to bottom right, rgba(240, 147, 251, 1),
-		rgba(245, 87, 108, 1));
-	background-repeat: no-repeat;
-	background-position: center;
-	background-attachment: fixed;
-}
-</style>
+    <meta charset="UTF-8">
+    <title>Students Registration Form</title>
+    <!-- Add the Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+        }
+
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            border-radius: 5px 5px 0 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .add-student-btn-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .add-student-btn {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            margin-top: 5px;
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .add-student-btn:hover {
+            background-color: #1e7e34;
+        }
+
+        .student-details {
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            margin-bottom: 10px;
+        }
+
+        .student-details p {
+            margin: 0;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background-color: #1e7e34;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background-color: #a71d2a;
+        }
+		body {
+            font-family: "Courier New", monospace;
+        }
+        
+        .student-details strong {
+            display: inline-block;
+            min-width: 150px; /* Set a fixed width for the label section */
+        }
+    body {
+            font-family: "Courier New", monospace;
+        }
+        
+        .student-details strong {
+            display: inline-block;
+            min-width: 150px; /* Set a fixed width for the label section */
+        }
+    </style>
 </head>
 <body>
-	<center>
-		<div>
-			<div class="card-header-blue">
-				<h1 class="card-heading">Students Registration Form</h1>
-				</div>
-			<a href="{{url_for('addrecord')}}">
-				<button class="button button1" type="button">Add Student</button>
-			</a>
-		</div>
-		<div class="mid">
-			<table class="table table-bordered">
-				<tr>
-					<th>ROLL_NO</th>
-					<th>NAME</th>
-					<th>AGE</th>
-					<th>GENDER</th>
-					<th>EMAIL_ID</th>
-					<th>DEPARTMENT</th>
-					<th>YEAR</th>
-					<th>PH_NO</th>
-					<th>EDIT</th>
-					<th>MAIL</th>
-					<th>DELETE</th>
-				</tr>
-				{% for d in data%}
-				<tr>
-					<th>{{d.roll_no}}</th>
-					<th>{{d.name}}</th>
-					<th>{{d.age}}</th>
-					<th>{{d.gender}}</th>
-					<th>{{d.email_id}}</th>
-					<th>{{d.dept}}</th>
-					<th>{{d.year}}</th>
-					<th>{{d.ph_no}}</th>
-					<th><a href="{{url_for('edit',roll=d.roll_no)}}"><button class="button button2" type="button">Edit</button> </a></th>
-					<th><a href="{{url_for('mailedit',mm=d.email_id)}}"><button class="button button2" type="button">Mail</button> </a></th>
-					<td><button class="button button2" type="button"data-roll="{{ d.roll_no }}" onclick="confirmDelete(this)">Remove</button></td> 
-					</tr>
-				{% endfor %}
-			</table>
-		</div>
-	</center>
+    <div class="container">
+        <div class="header">
+            <h1>Students Registration Form</h1>
+        </div>
+        <div class="add-student-btn-container">
+            <a href="{{url_for('addrecord')}}" class="btn add-student-btn">Add Student</a>
+        </div>
+        <div class="mid">
+            {% for d in data %}
+            <div class="student-details">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="mb-1"><strong>ROLL_NO:</strong> {{ d.roll_no }}</h5>
+                        <h5 class="mb-1"><strong>NAME:</strong> {{ d.name }}</h5>
+                        <h5 class="mb-1"><strong>AGE:</strong> {{ d.age }}</h5>
+                        <h5 class="mb-1"><strong>GENDER:</strong> {{ d.gender }}</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="mb-1"><strong>EMAIL_ID:</strong> {{ d.email_id }}</h5>
+                        <h5 class="mb-1"><strong>DEPARTMENT:</strong> {{ d.dept }}</h5>
+                        <h5 class="mb-1"><strong>YEAR:</strong> {{ d.year }}</h5>
+                        <h5 class="mb-1"><strong>PH_NO:</strong> {{ d.ph_no }}</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="btn-group">
+                            <a href="{{ url_for('edit', roll=d.roll_no) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ url_for('mailedit', mm=d.email_id) }}" class="btn btn-success">Mail</a>
+                            <button class="btn btn-danger" type="button" data-roll="{{ d.roll_no }}" onclick="confirmDelete(this)">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        var success_message = "{{ success_message }}";
+        if (success_message) {
+            alert(success_message);
+        }
+
+        function confirmDelete(button) {
+            var s = prompt("Enter CONFIRM to delete:");
+            if (s === "CONFIRM") {
+                var rollNo = button.getAttribute("data-roll");
+                var url = "/remove/" + rollNo;
+                window.location.href = url;
+            } else {
+                alert("Record cannot be deleted.");
+            }
+        }
+    </script>
 </body>
-<script>
-var success_message = "{{ success_message }}";
-if (success_message) {
-    alert(success_message);
-}
-function confirmDelete(button) {
-    var s = prompt("Enter CONFIRM to delete:");
-    if (s === "CONFIRM") {
-        var rollNo = button.getAttribute("data-roll");
-        var url = "/remove/" + rollNo;
-        window.location.href = url;
-    }
-	else 
-	alert("record con not delete")
-}
-</script>
 </html>
