@@ -15,7 +15,7 @@ mysql = MySQL(app)
 # Mail Configuration
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = '20s147@kce.ac.in'  # Replace with your email
+app.config['MAIL_USERNAME'] = "kce.ac.in'  # Replace with your email
 app.config['MAIL_PASSWORD'] = '********'  # Replace with your email password
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
@@ -107,7 +107,7 @@ def mailedit(mm):
     try:
         if request.method == 'POST':
             rev = request.form['email']
-            msg = Message(request.form['subject'], sender='20s147@kce.ac.in', recipients=[rev])
+            msg = Message(request.form['subject'], sender='@kce.ac.in', recipients=[rev])
             msg.body = request.form['message']
             mail.send(msg)
             return redirect(url_for('index'))
